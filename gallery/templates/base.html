@@ -1,28 +1,30 @@
-{%extends 'base.html'%}
+{% load bootstrap3 %}
+{% load static%}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
 
- {% block content %}
+  {% if title %}
+  <title>Instagramm app - {{title}}</title>
+  {% else %}
+    <title> instagram app </title>
+  {% endif %}
 
- <div class="container">
+  {% block styles %}
+    {% bootstrap_css %}
+    <link rel="stylesheet" href="{% static 'css/basegallery.css' %}">
+  {% endblock %}
 
-   <div class="row">
-     <img src="{{article.article_image.url}}"  class="img-responsive" alt="">
-   </div>
+</head>
+<body>
+    {% include "navbar.html" %}
 
-   <div class="row">
-     <h1 class="text-center">{{article.title}}</h1>
-   </div>
+    {% block content %} <h1 class='text-center'>gallery </h1> {%endblock%}
 
-   <div class="row">
-     {% autoescape on %}
-     {{article.post| safe}}
-    {% endautoescape %}
-
-   </div>
-
-   <div class="row">
-     <p>Posted {{article.pub_date|timesince}} by {{article.editor.first_name}}</p>
-   </div>
-
- </div>
-
- {% endblock %}
+    {% block scripts %}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+     {% bootstrap_javascript %}
+    {% endblock %}
+</body>
+</html>
