@@ -15,17 +15,19 @@ class User(models.Model):
     def save_user(self):
         self.save()
 
-# class tags(models.Model):
-#     name = models.CharField(max_length =30)
+class Profile(models.Model):
+    photo = models.ImageField(upload_to='images/', blank=True)
+    bio = models.CharField(max_length =30)
 
-#     def __str__(self):
-#         return self.name
+    def __str__(self):
+        return self.name
 class Image(models.Model):
-    image_name = models.ImageField(upload_to='articles/', blank=True)
-    image_caption = models.ImageField(upload_to='articles/', blank=True)
-    profile = models.ForeignKey(User,on_delete=models.CASCADE)
-    likes = models.ManyToManyField(likes)
-    comments = models.ManyToManyField(comments)
+    image = models.ImageField(upload_to='images/', blank=True)
+    name = models.CharField(max_length =30)
+    caption = models.CharField(max_length =30)
+    profile = models.ManyToManyField(Profile)
+    # user = models.ForeignKey(User,on_delete=models.CASCADE)
+    # comments = models.ManyToManyField(comments)
     def __str__(self):
         return self.name
 
@@ -40,11 +42,11 @@ class Image(models.Model):
 
     
 
-#     @classmethod
-#     def search_by_title(cls,search_term):
-#         news = cls.objects.filter(title__icontains=search_term)
-#         return news
-# class NewsLetterRecipients(models.Model):
-#     name = models.CharField(max_length = 30)
-#     email = models.EmailField()        
+    @classmethod
+    def search_by_caption(cls,search_term):
+        gallery = cls.objects.filter(title__icontains=search_term)
+        return gallery
+class GalleryLetterRecipients(models.Model):
+    name = models.CharField(max_length = 30)
+    email = models.EmailField()        
     
