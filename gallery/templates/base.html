@@ -6,14 +6,14 @@
   <meta charset="utf-8">
 
   {% if title %}
-  <title>Instagramm app - {{image}}</title>
+  <title>Instagramm app - {{title}}</title>
   {% else %}
     <title> instagram app </title>
   {% endif %}
 
   {% block styles %}
     {% bootstrap_css %}
-    <link rel="stylesheet" href="{% static 'css/baseimages.css' %}">
+    
   {% endblock %}
 
 </head>

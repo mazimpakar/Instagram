@@ -28,7 +28,7 @@ def gallery_today(request):
     else:
         form = GalleryLetterForm()
         form = NewImageForm()
-    return render(request, 'todays_gallery.html', {"date": date,"letterForm":form, "ImageForm":form, "images":all_images},{'images':images})
+    return render(request, 'todays_gallery.html', {"date": date,"letterForm":form, "ImageForm":form, "images":all_images})
 
 
 def past_days_galley(request, past_date):
