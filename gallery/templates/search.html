@@ -16,7 +16,13 @@
   {% if images %}
     {% for image in images %}
       <div class="col-sm-6 col-md-3">
-          <h1>{{image.caption}}</h1>
+          <h2 style="color:rgb(56, 3, 66);">{{image.name}}</h2>
+          <img src="{{image.image.url}}"  class="img-responsive" alt="">
+          <strong>Name:</strong> {{image.name}}
+          <br>
+          <strong>User:</strong>{{image.user}}
+          <br>
+          <strong>Caption:</strong>{{image.caption}}
       </div>
     {% endfor %}
   {% endif %}
