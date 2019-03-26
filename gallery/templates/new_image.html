@@ -10,13 +10,13 @@
   {{form.media}}
 
 {% block styles %} {% bootstrap_css %}
-  <link rel="stylesheet" href="{% static 'css/gallery.css' %}"> {% endblock %}
+  <link rel="stylesheet" href="{% static 'css/baseimages.css' %}"> {% endblock %}
 
 </head>
 
 <body>
 
-  <form  action="{%url 'new-image'%}" method="post" enctype="multipart/form-data">
+  <form  action="{%url 'new-image'%}" method="POST" enctype="multipart/form-data">
     {%csrf_token%}
 
     {% bootstrap_form form%}
