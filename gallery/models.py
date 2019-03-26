@@ -3,29 +3,24 @@ import datetime as dt
 from django.contrib.auth.models import User
 from tinymce.models import HTMLField
 # Create your models here.
-class User(models.Model):
-    first_name = models.CharField(max_length =30)
-    last_name = models.CharField(max_length =30)
-    email = models.EmailField()
-    phone_number = models.CharField(max_length = 10,blank =True)
-
-    def __str__(self):
-        return self.first_name
-
-    def save_user(self):
-        self.save()
 
 class Profile(models.Model):
-    photo = models.ImageField(upload_to='images/', blank=True)
+    image = models.ImageField(upload_to='images/', blank=True)
     bio = models.CharField(max_length =30)
 
     def __str__(self):
-        return self.name
+        return self.bio
+class tags(models.Model):
+    name = models.CharField(max_length =30)
+    def __str__(self):
+        return self.name 
+
 class Image(models.Model):
     image = models.ImageField(upload_to='images/', blank=True)
-    name = models.CharField(max_length =30)
-    caption = models.CharField(max_length =30)
-    profile = models.ManyToManyField(Profile)
+    name = models.CharField(max_length =30 )
+    caption = models.TextField(null = True)
+    user = models.ForeignKey(User,null=True)
+    # profile = models.ManyToManyField(Profile)
     # user = models.ForeignKey(User,on_delete=models.CASCADE)
     # comments = models.ManyToManyField(comments)
     def __str__(self):
@@ -35,16 +30,22 @@ class Image(models.Model):
         self.save()   
 
     def delete_image(self):
-        Image.objects.filter(id = self.pk).delete() 
-    
-    def update_caption(self, **kwargs):
-        self.objects.filter(id = self.pk).update(**kwargs)       
-
-    
+    	self.delete()
+    @classmethod
+    def all_images(cls):
+        images = cls.objects.all()
+        return images
 
     @classmethod
-    def search_by_caption(cls,search_term):
-        gallery = cls.objects.filter(title__icontains=search_term)
+    def get_image(cls, id):
+        image = cls.objects.get(id=id)
+        return image
+    def __str__(self):
+    	return self.user.username
+   
+    @classmethod
+    def search_by_name(cls,search_term):
+        gallery = cls.objects.filter(name__icontains=search_term)
         return gallery
 class GalleryLetterRecipients(models.Model):
     name = models.CharField(max_length = 30)
